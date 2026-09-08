@@ -1,15 +1,30 @@
-name: Nightly Automation
+name: Nightly Tumblr Automation
 
 on:
   schedule:
-    # বাংলাদেশ সময় রাত ৩:৩০ AM (UTC 21:30)
+    # বাংলাদেশ সময় রাত ৩:৩০ AM
     - cron: '30 21 * * *'
-  workflow_dispatch: # ম্যানুয়ালি টেস্ট করার জন্য
+  workflow_dispatch:
 
 jobs:
-  run-task:
+  run-automation:
     runs-on: ubuntu-latest
     steps:
-      - name: Run script
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
         run: |
-          echo "Automation task triggered successfully at night!"
+          python -m pip install --upgrade pip
+          pip install pandas pytumblr google-generativeai requests
+
+      - name: Run Automation Script
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python main.py
