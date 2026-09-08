@@ -1,0 +1,15 @@
+name: Nightly Automation
+
+on:
+  schedule:
+    # বাংলাদেশ সময় রাত ৩:৩০ AM (UTC 21:30)
+    - cron: '30 21 * * *'
+  workflow_dispatch: # ম্যানুয়ালি টেস্ট করার জন্য
+
+jobs:
+  run-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run script
+        run: |
+          echo "Automation task triggered successfully at night!"
