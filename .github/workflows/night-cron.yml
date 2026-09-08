@@ -27,8 +27,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas pytumblr google-generativeai requests
 
-      - name: Run Automation Script
+     - name: Run Automation Script
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: python main.py
