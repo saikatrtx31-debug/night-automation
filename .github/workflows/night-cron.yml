@@ -1,9 +1,13 @@
-name: Nightly Tumblr Automation
+name: Tumblr Automated 3x Daily Schedule
 
 on:
   schedule:
-    # বাংলাদেশ সময় রাত ৩:৩০ AM
-    - cron: '30 21 * * *'
+    # ১. আমেরিকা সকাল ৮:০০ AM EST (UTC 13:00)
+    - cron: '0 13 * * *'
+    # ২. আমেরিকা বিকাল ৪:০০ PM EST (UTC 21:00)
+    - cron: '0 21 * * *'
+    # ৩. আমেরিকা রাত ১২:০০ AM EST (UTC 5:00)
+    - cron: '0 5 * * *'
   workflow_dispatch:
 
 jobs:
